@@ -1,5 +1,8 @@
 # Manual de Pentesting - JuiceShop
 
+**Este write-up forma parte del laboratorio de HackJourney. Para más información, visita [www.hackjourney.com](https://www.hackjourney.com)**
+
+
 ## 📜 Información General
 
 - **Objetivo:** Realizar un pentest sobre la máquina _JuiceShop_ (IP: `10.10.30.134`).

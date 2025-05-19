@@ -1,8 +1,10 @@
 # Informe de Explotación - Maquina: Liftpad
 
+**Este write-up forma parte del laboratorio de HackJourney. Para más información, visita [www.hackjourney.com](https://www.hackjourney.com)**
+
 ## 1. Información General
 
-* **Nombre de la máquina:** Liftpad
+* **Nombre de la máquina:** Liftpad (HackJourney)
 * **Dirección IP:** Variable según reinicio (ej. 10.10.99.18, 10.10.52.177, 10.10.61.204)
 * **VPN activa:** Tunel VPN por OpenVPN (tun1)
 
@@ -64,13 +66,11 @@ python3 -c 'import pty; pty.spawn("/bin/bash")'
 
 ---
 
-## 5. Obtención de Flag
+## 5. Acceso Root Verificado
 
-```bash
-cat /root/root.txt
-```
+Se confirmó acceso al sistema con privilegios de superusuario (`root`) en la máquina.
 
-> Flag obtenida correctamente desde el directorio `/root/`
+> Por políticas de HackJourney, no se muestran flags, contraseñas ni hashes en write-ups públicos.
 
 ---
 

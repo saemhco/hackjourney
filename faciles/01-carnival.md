@@ -2,6 +2,8 @@
 
 ---
 
+**Este write-up forma parte del laboratorio de HackJourney. Para más información, visita [www.hackjourney.com](https://www.hackjourney.com)**
+
 # 🧬 1. **Reconocimiento**
 
 ### 🔍 Escaneo de puertos:

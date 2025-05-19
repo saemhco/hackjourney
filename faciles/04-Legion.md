@@ -1,5 +1,7 @@
 # Manual de Pentesting - Maquina: **Legion**
 
+**Este write-up forma parte del laboratorio de HackJourney. Para más información, visita [www.hackjourney.com](https://www.hackjourney.com)**
+
 ## 1. Escaneo de puertos y servicios
 
 ### Comando utilizado:

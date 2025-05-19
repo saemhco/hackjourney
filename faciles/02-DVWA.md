@@ -1,5 +1,9 @@
 # 🛡️ Manual de Pentesting: Captura de Flag en DVWA - Escaneo, Enumeración y Command Injection
 
+
+**Este write-up forma parte del laboratorio de HackJourney. Para más información, visita [www.hackjourney.com](https://www.hackjourney.com)**
+
+
 ## 1. Escaneo de Puertos y Servicios
 
 Comenzamos identificando los puertos abiertos del objetivo (`10.10.120.231`) usando **Nmap**:
